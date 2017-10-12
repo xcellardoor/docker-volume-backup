@@ -1,6 +1,6 @@
 #!/bin/bash
 
-compose_file_path=$1
+#compose_file_path=$1
 project_name=${2,,}
 backup_path=$3
 backup_or_restore=$4
@@ -26,8 +26,8 @@ function restore_volume {
 }
 
 function main {
-  echo "Stopping running containers"
-  docker-compose -f $compose_file_path -p $project_name stop
+#  echo "Stopping running containers"
+#  docker-compose -f $compose_file_path -p $project_name stop
 
   echo "Mounting volumes and performing backup/restore..."
   volumes=($(docker volume ls -f name=$project_name | awk '{if (NR > 1) print $2}'))
@@ -46,8 +46,8 @@ function main {
     fi
   done
 
-  echo "Restarting containers"
-  docker-compose -f $compose_file_path -p $project_name start
+#  echo "Restarting containers"
+#  docker-compose -f $compose_file_path -p $project_name start
 }
 
 main
