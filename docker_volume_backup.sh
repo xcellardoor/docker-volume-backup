@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #compose_file_path=$1
-project_name=${2,,}
-backup_path=$3
-backup_or_restore=$4
-restore_date=$5
+project_name=${1,,}
+backup_path=$2
+backup_or_restore=$3
+restore_date=$4
 
 set -e
 
