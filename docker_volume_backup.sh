@@ -12,9 +12,9 @@ function backup_volume {
   volume_name=$1
   backup_destination=$2
   #date_suffix=$(date -I)
-  date_suffix=$(date +%Y-%m-%d-%H:%M)
+  date_suffix=$(date +%Y-%m-%d-%H-%M)
 
-  docker run --rm -v $volume_name:/data -v $backup_destination:/backup alpine:latest tar -zcvpf /backup/$volume_name-$date_suffix.tar /data
+  docker run --rm -v $volume_name:/data -v $backup_destination:/backup ubuntu:latest tar -zcvpf /backup/$volume_name-$date_suffix.tar /data
 }
 
 function restore_volume {
@@ -22,8 +22,8 @@ function restore_volume {
   backup_destination=$2
   date=$3
 
-  docker run --rm -v $volume_name:/data alpine find /data -mindepth 1 -delete
-  docker run --rm -v $volume_name:/data -v $backup_destination:/backup alpine tar --same-owner -xvf /backup/$volume_name-$date.tar -C .
+  docker run --rm -v $volume_name:/data ubuntu find /data -mindepth 1 -delete
+  docker run --rm -v $volume_name:/data -v $backup_destination:/backup ubuntu tar --same-owner -xvf /backup/$volume_name-$date.tar -C .
 }
 
 function main {
